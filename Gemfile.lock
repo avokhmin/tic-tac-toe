@@ -85,17 +85,6 @@ GEM
     ffi (1.9.10)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-    haml (4.0.7)
-      tilt
-    haml2slim (0.4.7)
-      haml (>= 3.0)
-      nokogiri
-      ruby_parser
-    html2haml (2.0.0)
-      erubis (~> 2.7.0)
-      haml (~> 4.0.0)
-      nokogiri (~> 1.6.0)
-      ruby_parser (~> 3.5)
     i18n (0.7.0)
     interception (0.5)
     jbuilder (2.3.2)
@@ -154,8 +143,6 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
-    rails_apps_pages (0.6.0)
-    rails_apps_testing (0.3.12)
     rails_layout (1.0.26)
     railties (4.2.4)
       actionpack (= 4.2.4)
@@ -180,8 +167,6 @@ GEM
       rspec-mocks (~> 3.3.0)
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
-    ruby_parser (3.7.1)
-      sexp_processor (~> 4.1)
     rubyzip (1.1.7)
     sass (3.4.19)
     sass-rails (5.0.4)
@@ -195,7 +180,6 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
-    sexp_processor (4.6.0)
     simple_form (3.2.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
@@ -252,8 +236,6 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   faker
-  haml2slim
-  html2haml
   jbuilder (~> 2.0)
   jquery-rails
   launchy
@@ -263,8 +245,6 @@ DEPENDENCIES
   puma
   quiet_assets
   rails (= 4.2.4)
-  rails_apps_pages
-  rails_apps_testing
   rails_layout
   rspec-rails
   sass-rails (~> 5.0)
