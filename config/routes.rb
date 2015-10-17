@@ -6,9 +6,8 @@ Rails.application.routes.draw do
   #
   ############################################################
 
+  apipie
   namespace :api do
-    apipie
-
     namespace :v1, constraints: { format: 'json' }, defaults: { format: 'json' } do
       resources :games, only: [:index, :show] do
         member do

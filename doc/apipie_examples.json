@@ -1,0 +1,106 @@
+{
+  "games#show": [
+    {
+      "verb": "GET",
+      "path": "/api/v1/games/27f978af-8cf0-43c9-981c-2855fa5ba936",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "id": "27f978af-8cf0-43c9-981c-2855fa5ba936",
+        "board": [
+          [
+            {
+              "value": 0,
+              "row": 0,
+              "column": 0
+            },
+            {
+              "value": 0,
+              "row": 0,
+              "column": 1
+            },
+            {
+              "value": 0,
+              "row": 0,
+              "column": 2
+            }
+          ],
+          [
+            {
+              "value": 0,
+              "row": 1,
+              "column": 0
+            },
+            {
+              "value": 0,
+              "row": 1,
+              "column": 1
+            },
+            {
+              "value": 0,
+              "row": 1,
+              "column": 2
+            }
+          ],
+          [
+            {
+              "value": 0,
+              "row": 2,
+              "column": 0
+            },
+            {
+              "value": 0,
+              "row": 2,
+              "column": 1
+            },
+            {
+              "value": 0,
+              "row": 2,
+              "column": 2
+            }
+          ]
+        ],
+        "users": [
+          {
+            "name": "Foo",
+            "key": 1
+          },
+          {
+            "name": "Bar",
+            "key": 2
+          }
+        ],
+        "size": 3
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    }
+  ],
+  "games#tic": [
+    {
+      "verb": "PUT",
+      "path": "/api/v1/games/455878fd-ac60-4689-a605-14a4403b68a7/tic/1/2",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "value": 1,
+        "user": {
+          "name": "Foo",
+          "key": 1
+        },
+        "win": false,
+        "drawn": false
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    }
+  ]
+}
