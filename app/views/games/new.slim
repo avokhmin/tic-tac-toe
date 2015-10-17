@@ -1,0 +1,19 @@
+.row
+  .col-md-6.col-md-offset-3
+    h1= t('.heading')
+  .col-md-6.col-md-offset-3
+    = simple_form_for @game do |f|
+      = f.simple_fields_for 'users[]', @user1 do |uf|
+        = uf.input :name,
+          label:       t('first_user', id: 1),
+          placeholder: t('simple_form.placeholders.user.name')
+      = f.simple_fields_for 'users[]', @user2 do |uf|
+        = uf.input :name,
+          label:       t('.second_user'),
+          placeholder: t('simple_form.placeholders.user.name')
+
+
+      = button_tag type: :submit, class: 'btn btn-primary' do
+        i.fa.fa-check>
+        = t('.submit_button')
+      =< t('.cancel_link_html', url: games_path)

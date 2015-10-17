@@ -19,4 +19,11 @@ class User
     @key  = key
   end
 
+  # Public: Get the user name.
+  #
+  # Returns String name.
+  def to_s
+    name
+  end
+
 end

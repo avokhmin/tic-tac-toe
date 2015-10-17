@@ -1,0 +1,20 @@
+.row
+  .col-md-6.col-md-offset-3
+    h1= t('.heading')
+
+  .col-md-6.col-md-offset-3
+    a.btn.btn-primary href=new_game_path
+      i.fa.fa-plus>
+      = t('.new_link')
+    hr
+  .col-md-6.col-md-offset-3
+    .panel.panel-default
+      .panel-heading
+        h4= t('.winners')
+      .panel-body
+        - if @winners.blank?
+          b.text-warning= t('.no_winners')
+        - else
+          ol
+            - @winners.each do |user|
+              li= user.name

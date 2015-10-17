@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'visitors#index'
+  root 'games#index'
+
+  resources :games, only: %i(index new create show)
 end

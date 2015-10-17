@@ -42,11 +42,11 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
-  config.log_level = :debug
+  config.log_level = ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].to_sym : :info
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
@@ -56,6 +56,21 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
+  config.cache_store = :dalli_store,
+                      (ENV['MEMCACHIER_SERVERS'] || '').split(','),
+                      {
+                        username:             ENV['MEMCACHIER_USERNAME'],
+                        password:             ENV['MEMCACHIER_PASSWORD'],
+                        failover:             ENV['DALLI_FAILOVER']             || true,
+                        socket_timeout:       ENV['DALLI_SOCKET_TIMEOUT']       || 1.5,
+                        socket_failure_delay: ENV['DALLI_SOCKET_FAILURE_DELAY'] || 0.2,
+                        pool_size:            ENV['DALLI_CACHE_POOL']           || 10,
+                      }
+
+  # Cache compiled assets to speed up deploys.
+  config.assets.cache_store = :dalli_store,
+                       (ENV['MEMCACHIER_SERVERS'] || '').split(','),
+                       { username: ENV['MEMCACHIER_USERNAME'], password: ENV['MEMCACHIER_PASSWORD'] }
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'

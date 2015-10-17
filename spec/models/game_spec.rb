@@ -27,6 +27,10 @@ RSpec.describe Game, type: :model do
     it 'assigns a size' do
       expect(game.size).to eq 4
     end
+
+    it 'assigns a ID' do
+      expect(game.id).to be
+    end
   end
 
   describe '#win?' do
@@ -133,6 +137,21 @@ RSpec.describe Game, type: :model do
     it 'rotates an users' do
       game.next_move
       expect(game.users).to eq [user2, user1]
+    end
+  end
+
+  describe '#save' do
+    it 'saves game to cache' do
+      expect(game.save).to be_truthy
+      expect(Rails.cache.read ['Game#find', game.id]).to be
+    end
+  end
+
+  describe '#find' do
+    it 'finds game by ID' do
+      expect(Game.find game.id).to_not be
+      game.save
+      expect(Game.find game.id).to be
     end
   end
 

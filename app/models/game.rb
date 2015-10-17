@@ -1,8 +1,12 @@
 require 'matrix'
 
 class Game
+  include ActiveModel::Conversion
   include ActiveModel::Validations
 
+  GAME_EXPIRATION = 1.hour
+
+  attr_reader :id
   attr_accessor :size, :board, :users
 
   validates :size,
@@ -20,6 +24,7 @@ class Game
   # size  - the Integer board size (default: 3).
   # users - the Array of User instances.
   def initialize(size: 3, users: [])
+    @id           = SecureRandom.uuid
     @size         = size
     @board        = Matrix.zero(size).to_a
     @users        = users
@@ -61,6 +66,29 @@ class Game
   # Returns the Array of User instances.
   def next_move
     users.rotate!
+  end
+
+  # Public: Check if game is persisted.
+  #
+  # Returns true if it is, false otherwise.
+  def persisted?
+    id.present?
+  end
+
+  # Public: Save a game to cache.
+  #
+  # Returns true if it is, false otherwise.
+  def save
+    Rails.cache.write ['Game#find', @id], self, expires_in: GAME_EXPIRATION
+  end
+
+  # Public: Get cached Game by ID.
+  #
+  # id - the String ID.
+  #
+  # Returns Game instance or nil if it's not found.
+  def self.find(id)
+    Rails.cache.read ['Game#find', id]
   end
 
   private

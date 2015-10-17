@@ -20,4 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  games:
+    index:
+      heading:                                      "Tic-tac-toe"
+      new_link:                                     "New game"
+      winners:                                      "Winners"
+      no_winners:                                   "No winners"
+    new:
+      heading:                                      "Create a game"
+      submit_button:                                "Create this game"
+      first_user:                                   "First user"
+      second_user:                                  "Second user"
+      cancel_link_html:                             " or <a href='%{url}' class='cancel'>cancel</a>"
+    create:
+        error_flash:                                "Woops! Please correct the errors below"
+        success_flash:                              "Thanks! Game has been created"
+    show:
+      heading:                                      "Game"
