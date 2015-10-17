@@ -1,0 +1,10 @@
+script: 'bundle exec rspec spec'
+language: ruby
+notifications:
+  email:
+    - avokhmin@gmail.com
+branches:
+  only:
+    - master
+rvm:
+  - 2.2.3
