@@ -1,0 +1,19 @@
+'use strict'
+<% environment.context_class.instance_eval { include Rails.application.routes.url_helpers } %>
+
+service = angular.module('TicTacToe').factory 'GameService', (railsResourceFactory, railsSerializer) ->
+  resource = railsResourceFactory
+    url:  '<%= api_v1_games_path %>'
+    name: 'game'
+    fullResponse: true
+    serializer: railsSerializer ->
+      @resource 'games', 'GameService'
+
+  resource::tic = (row, column) ->
+    self = this
+    resource.$put(self.$url("tic/#{row}/#{column}")).then (result) ->
+      result.data
+
+  resource
+
+service.$inject = ['railsResourceFactory', 'railsSerializer'];

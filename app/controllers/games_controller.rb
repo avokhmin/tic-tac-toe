@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
 
   def index
-    @winners = Rails.cache.read('Game#winners') || []
+    @winners = Game.winners
   end
 
   def new
@@ -24,7 +24,7 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find params[:id]
+    @game = Game.find(params[:id]) or raise ActionController::RoutingError.new('404')
   end
 
   private

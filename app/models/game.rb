@@ -1,6 +1,7 @@
 require 'matrix'
 
 class Game
+  include ActiveModel::Serialization
   include ActiveModel::Conversion
   include ActiveModel::Validations
 
@@ -24,7 +25,6 @@ class Game
   # size  - the Integer board size (default: 3).
   # users - the Array of User instances.
   def initialize(size: 3, users: [])
-    @id           = SecureRandom.uuid
     @size         = size
     @board        = Matrix.zero(size).to_a
     @users        = users
@@ -54,11 +54,10 @@ class Game
   # row    - the Integer row.
   # column - the Integer column.
   #
-  # Returns true if tic is successful, false otherwise.
+  # Returns the User key if tic is successful, false otherwise.
   def tic(row: nil, column: nil)
     return false unless board[row][column].zero?
     board[row][column] = current_user.key
-    true
   end
 
   # Public: Next move.
@@ -79,7 +78,23 @@ class Game
   #
   # Returns true if it is, false otherwise.
   def save
+    return unless valid?
+    @id = SecureRandom.uuid unless persisted?
     Rails.cache.write ['Game#find', @id], self, expires_in: GAME_EXPIRATION
+  end
+
+  # Public: Destroy a game from cache.
+  #
+  # Returns true if it is, false otherwise.
+  def destroy
+    Rails.cache.delete ['Game#find', @id]
+  end
+
+  # Public: Get current user.
+  #
+  # Returns current User instance.
+  def current_user
+    users.first
   end
 
   # Public: Get cached Game by ID.
@@ -91,13 +106,20 @@ class Game
     Rails.cache.read ['Game#find', id]
   end
 
-  private
-
-  # Private: Get current user.
+  # Public: Add a new winner to the TOP list.
   #
-  # Returns current User instance.
-  def current_user
-    users.first
+  # user - the User instance.
+  def self.add_winner(user)
+    users = winners || []
+    users.unshift user
+    Rails.cache.write 'Game#winners', users.first(10)
+  end
+
+  # Public: Get all winners
+  #
+  # Returns the Array of users.
+  def self.winners
+    Rails.cache.read('Game#winners') || []
   end
 
 end

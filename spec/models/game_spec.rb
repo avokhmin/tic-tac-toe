@@ -27,10 +27,6 @@ RSpec.describe Game, type: :model do
     it 'assigns a size' do
       expect(game.size).to eq 4
     end
-
-    it 'assigns a ID' do
-      expect(game.id).to be
-    end
   end
 
   describe '#win?' do
@@ -119,7 +115,7 @@ RSpec.describe Game, type: :model do
 
   describe '#tic' do
     it 'returns true if updates a board' do
-      expect(game.tic(row: 1, column: 2)).to be_truthy
+      expect(game.tic(row: 1, column: 2)).to eq 1
       expect(game.board).to eq [
         [0, 0, 0],
         [0, 0, 1],
@@ -128,7 +124,7 @@ RSpec.describe Game, type: :model do
     end
 
     it 'returns false if can not update a board' do
-      expect(game.tic(row: 1, column: 2)).to be_truthy
+      expect(game.tic(row: 1, column: 2)).to eq 1
       expect(game.tic(row: 1, column: 2)).to be_falsy
     end
   end
@@ -144,6 +140,19 @@ RSpec.describe Game, type: :model do
     it 'saves game to cache' do
       expect(game.save).to be_truthy
       expect(Rails.cache.read ['Game#find', game.id]).to be
+    end
+
+    it 'assigns a ID' do
+      game.save
+      expect(game.id).to be
+    end
+  end
+
+  describe '#destroy' do
+    it 'destroys a game from the cache' do
+      game.save
+      expect(game.destroy).to be_truthy
+      expect(Rails.cache.read ['Game#find', game.id]).to_not be
     end
   end
 

@@ -37,3 +37,6 @@ en:
         success_flash:                              "Thanks! Game has been created"
     show:
       heading:                                      "Game"
+      user_won_html:                                "User '{{resource.current_user.name}}' is won!"
+      new_link:                                     "Create a game"
+      drawn:                                        "Drawn..."

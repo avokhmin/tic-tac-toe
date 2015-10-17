@@ -2,16 +2,27 @@ source 'https://rubygems.org'
 
 ruby '2.2.3'
 
+gem 'active_model_serializers'
+gem 'apipie-rails',                     '0.3.3' # https://github.com/Apipie/apipie-rails/issues/353
+gem 'dalli'
 gem 'rails', '4.2.4'
 
 # HTML, JS, CSS
+gem 'angularjs-rails-resource'
+gem 'angularjs-rails'
 gem 'bootstrap-sass'
 gem 'coffee-rails'
+gem 'font-awesome-sass'
 gem 'jquery-rails'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'uglifier'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-angular-bootstrap'
+  # gem 'rails-assets-angularjs-rails-resource'
+end
 
 group :production do
   gem 'rails_12factor'

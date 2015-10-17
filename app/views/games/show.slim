@@ -1,3 +1,25 @@
 .row ng-controller='GameController as gc'
-  .col-md-6.col-md-offset-3
+  .col-md-4.col-md-offset-4 ng-init="init('#{@game.id}')"
     h1= t('.heading')
+
+  .col-md-4.col-md-offset-4 ng-show='resource.win'
+    .alert.alert-success
+      h4= t('.user_won_html')
+
+  .col-md-4.col-md-offset-4 ng-show='resource.drawn && !resource.win'
+    .alert.alert-warning
+      h4= t('.drawn')
+
+  .col-md-4.col-md-offset-4 ng-show='resource.win || resource.drawn'
+    a.btn.btn-primary href=new_game_path
+      i.fa.fa-plus>
+      = t('.new_link')
+
+  .col-md-4.col-md-offset-4 ng-hide='resource.win || resource.drawn'
+    table.table.table-bordered
+      tbody
+        tr ng-repeat='row in resource.board'
+          th.text-center ng-repeat='column in row' ng-switch="column.value" ng-click='tic(column)'
+            i.fa.fa-close.fa-5x    ng-switch-when=1
+            i.fa.fa-circle-o.fa-5x ng-switch-when=2
+            i.fa.fa-question.fa-5x ng-switch-default=true
