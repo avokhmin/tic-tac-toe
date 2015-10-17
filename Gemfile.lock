@@ -75,6 +75,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
+    connection_pool (2.2.0)
     daemons (1.2.3)
     dalli (2.7.4)
     debug_inspector (0.0.2)
@@ -243,6 +244,7 @@ DEPENDENCIES
   byebug
   capybara
   coffee-rails
+  connection_pool
   dalli
   font-awesome-sass
   jquery-rails

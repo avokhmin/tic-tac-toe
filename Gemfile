@@ -25,9 +25,10 @@ source 'https://rails-assets.org' do
 end
 
 group :production do
-  gem 'rails_12factor'
-  gem 'rack-timeout'
+  gem 'connection_pool'
   gem 'puma'
+  gem 'rack-timeout'
+  gem 'rails_12factor'
 end
 
 group :development do
