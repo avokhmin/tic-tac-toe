@@ -1,8 +1,19 @@
 require 'matrix'
 
 class Game
+  include ActiveModel::Validations
 
-  attr_reader :size, :board, :users
+  attr_accessor :size, :board, :users
+
+  validates :size,
+            presence:     true,
+            numericality: { greater_than_or_equal_to: 3 }
+
+  validates :board,
+            presence:     true
+
+  validates :users,
+            presence:     true
 
   # Public: Constructor.
   #

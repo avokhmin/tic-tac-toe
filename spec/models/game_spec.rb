@@ -2,8 +2,14 @@ require 'rails_helper'
 
 RSpec.describe Game, type: :model do
 
-  let(:user1) { User.new(1) }
-  let(:user2) { User.new(2) }
+  it { is_expected.to validate_presence_of(:size) }
+  it { is_expected.to validate_numericality_of(:size).is_greater_than_or_equal_to(3) }
+
+  it { is_expected.to validate_presence_of(:users) }
+  it { is_expected.to validate_presence_of(:board) }
+
+  let(:user1) { User.new(name: 'Foo', key: 1) }
+  let(:user2) { User.new(name: 'Bar', key: 2) }
   let(:users) { [user1, user2] }
   let(:game)  { Game.new(users: users) }
 
